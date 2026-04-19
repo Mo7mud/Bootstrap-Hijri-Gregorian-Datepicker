@@ -1435,7 +1435,7 @@
 
                         initFormatting();
 
-                        $(".data-switch-button").html(options.hijriText);
+                        widget.find(".data-switch-button").html(options.hijriText);
                     }
                     else {
                         options.hijri = true;
@@ -1443,7 +1443,7 @@
                         fillHijriMonths();
                         initFormatting();
 
-                        $(".data-switch-button").html(options.gregorianText);
+                        widget.find(".data-switch-button").html(options.gregorianText);
 
                     }
 
