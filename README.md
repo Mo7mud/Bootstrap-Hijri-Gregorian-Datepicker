@@ -1,5 +1,5 @@
 # Demo
-See  [Live Demo](https://mo7mud.github.io/bootstrap-hijri-datepicker/src/)
+See  [Live Demo](https://mo7mud.github.io/bootstrap-hijri-datepicker/samples/)
 
 # Getting Started
 Bootstrap Hijri Date picker v1.0.0
