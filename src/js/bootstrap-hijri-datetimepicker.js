@@ -2718,6 +2718,11 @@
 
         $.extend(true, options, dataToOptions());
 
+        // The "No Future" Trick: If enabled, set maxDate to NOW
+        if (options.noFuture) {
+            options.maxDate = getMoment();
+        }
+
         // Apply localization to UI buttons based on the selected locale
         if (options.locale && options.locale.toLowerCase().startsWith('ar')) {
             options.icons.today = 'اليوم';
@@ -2960,6 +2965,7 @@
         viewDate: false,
         hijri: false,
         isRTL: false,
+        noFuture: false, // If true, sets the maxDate to the current date, thus preventing the user from selecting a future date.
         hijriText: "هجري",
         gregorianText: "ميلادي"
     };
