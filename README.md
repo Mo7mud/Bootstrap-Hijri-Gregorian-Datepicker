@@ -113,8 +113,6 @@ Download the  repository and use css and javascript files in `dist` folder
 
 This project was built from great work done by
 
-* @xosh https://github.com/xsoh/moment-hijri
-* @Eonasdan https://github.com/Eonasdan/bootstrap-datetimepicker
-* @iOsama https://github.com/iOsama
+* @balbarak https://github.com/balbarak/bootstrap-hijri-datepicker
 ## License
 MIT

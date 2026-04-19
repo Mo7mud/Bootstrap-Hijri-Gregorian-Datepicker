@@ -11323,7 +11323,7 @@
 	// Adjustment of the day count for month(5) and month(6) months for the year (1446) as per Umm al-Qura Calendar.
 	// Updated month(5) to have 29 days and month(6) to have 30 days.
 	let indexOfMonth_5 = getNewMoonMJDNIndex(1446, 5);
-	console.log(indexOfMonth_5);
+	// console.log(indexOfMonth_5);
 	ummalqura.ummalquraData[indexOfMonth_5] -= 1;
 
 
@@ -12301,7 +12301,7 @@
                         .append($('<th>').addClass('prev').attr('data-action', 'previous')
                             .append($('<span>').html(options.icons.previous))
                         )
-                        .append($('<th>').addClass('picker-switch').attr('data-action', 'pickerSwitch').attr('colspan', (options.calendarWeeks ? '6' : '5')))
+                        .append($('<th>').addClass('picker-switch almarai-bold').attr('data-action', 'pickerSwitch').attr('colspan', (options.calendarWeeks ? '6' : '5')))
                         .append($('<th>').addClass('next').attr('data-action', 'next')
                             .append($('<span>').html(options.icons.next))
                         )
@@ -12453,7 +12453,7 @@
                     dateView = $('<div>').addClass('datepicker').append(getDatePickerTemplate()),
                     timeView = $('<div>').addClass('timepicker').append(getTimePickerTemplate()),
                     content = $('<ul>').addClass('list-unstyled'),
-                    toolbar = $('<li>').addClass('picker-switch' + (options.collapse ? ' accordion-toggle' : '')).append(getToolbar());
+                    toolbar = $('<li>').addClass('picker-switch almarai-bold' + (options.collapse ? ' accordion-toggle' : '')).append(getToolbar());
 
                 if (options.inline) {
                     template.removeClass('dropdown-menu');
@@ -12486,7 +12486,7 @@
                     content.append(toolbar);
                 }
                 if (hasDate()) {
-                    content.append($('<li>').addClass((options.collapse && hasTime() ? 'collapse in' : '')).append(dateView));
+                    content.append($('<li>').addClass((options.collapse && hasTime() ? 'collapse show' : '')).append(dateView));
                 }
                 if (options.toolbarPlacement === 'default') {
                     content.append(toolbar);
@@ -12637,7 +12637,7 @@
                 }
 
                 while (currentDate.isBefore(viewDate.clone().endOf('w'))) {
-                    row.append($('<th>').addClass('dow').text(currentDate.format('dd')));
+                    row.append($('<th>').addClass('dow almarai-bold').text(currentDate.format('dd')));
                     currentDate.add(1, 'days');
                 }
                 widget.find('.datepicker-days thead').append(row);
@@ -12748,7 +12748,7 @@
 
                 while (monthsShort.isSame(viewDate, 'years')) {
 
-                    spans.push($('<span>').attr('data-action', 'selectMonth').addClass('month').text(monthsShort.format('MMM')));
+                    spans.push($('<span>').attr('data-action', 'selectMonth').addClass('month almarai-regular').text(monthsShort.format('MMM')));
 
                     monthsShort.add(1, 'months');
 
@@ -12770,7 +12770,7 @@
                     spans.push($('<span>')
                         .attr('data-action', 'selectMonth')
                         .attr('data-month', currentMonth)
-                        .addClass('month').text(monthsShort.format('iMMM')));
+                        .addClass('month almarai-regular').text(monthsShort.format('iMMM')));
                     monthsShort.add(1, 'iMonth');
                     currentMonth++;
                 }
@@ -12988,7 +12988,7 @@
                     if (currentDate.isSame(date, 'days') && !unset) {
                         clsName += ' active';
                     }
-                    if (!isValid(currentDate, 'days')) {
+                    if (!isValid(currentDate, 'd')) {
                         clsName += ' disabled';
                     }
                     if (currentDate.isSame(getMoment(), 'days')) {
@@ -13453,8 +13453,8 @@
                 togglePicker: function (e) {
                     var $this = $(e.target),
                         $parent = $this.closest('ul'),
-                        expanded = $parent.find('.in'),
-                        closed = $parent.find('.collapse:not(.in)'),
+                        expanded = $parent.find('.show'),
+                        closed = $parent.find('.collapse:not(.show)'),
                         collapseData;
 
                     if (expanded && expanded.length) {
@@ -13466,8 +13466,8 @@
                             expanded.collapse('hide');
                             closed.collapse('show');
                         } else { // otherwise just toggle in class on the two views
-                            expanded.removeClass('in');
-                            closed.addClass('in');
+                            expanded.removeClass('show');
+                            closed.addClass('show');
                         }
                         if ($this.is('span')) {
                             $this.toggleClass(options.icons.time + ' ' + options.icons.date);
@@ -14834,6 +14834,21 @@
         viewDate = date.clone();
 
         $.extend(true, options, dataToOptions());
+
+        // Apply localization to UI buttons based on the selected locale
+        if (options.locale && options.locale.toLowerCase().startsWith('ar')) {
+            options.icons.today = 'اليوم';
+            options.icons.clear = 'مسح';
+            options.icons.close = 'إغلاق';
+            options.hijriText = 'هجري';
+            options.gregorianText = 'ميلادي';
+        } else {
+            options.icons.today = 'Today';
+            options.icons.clear = 'Clear';
+            options.icons.close = 'Close';
+            options.hijriText = 'Hijri';
+            options.gregorianText = 'Gregorian';
+        }
 
         picker.options(options);
 
