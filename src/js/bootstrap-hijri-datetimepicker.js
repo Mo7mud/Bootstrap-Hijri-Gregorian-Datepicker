@@ -2718,9 +2718,19 @@
 
         $.extend(true, options, dataToOptions());
 
-        // The "No Future" Trick: If enabled, set maxDate to NOW
+        // The Smart "No Future" Trick
         if (options.noFuture) {
-            options.maxDate = getMoment();
+            var today = getMoment(); // 
+            
+            if (options.maxDate) { 
+                var userMaxDate = moment(options.maxDate);
+                
+                if (userMaxDate.isAfter(today)) {
+                    options.maxDate = today;
+                }
+            } else {
+                options.maxDate = today;
+            }
         }
 
         // Apply localization to UI buttons based on the selected locale

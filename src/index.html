@@ -121,7 +121,7 @@
                             <div id="secGeneral" class="collapse show" data-parent="#masterAccordion">
                                 <div class="card-body">
                                     <div class="custom-control custom-switch mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="hijri" >
+                                        <input type="checkbox" class="custom-control-input" id="hijri">
                                         <label class="custom-control-label" for="hijri">Hijri</label>
                                     </div>
                                     <div class="custom-control custom-switch mb-2">
@@ -233,6 +233,12 @@
                                         <label class="custom-control-label" for="useDaysOfWeekDisabled">Disable Weekends
                                             <i class="fas fa-info-circle small text-muted"
                                                 title="Friday and Saturday"></i></label>
+                                    </div>
+                                    <div class="custom-control custom-switch mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="noFuture">
+                                        <label class="custom-control-label" for="noFuture">No Future Dates
+                                            (noFuture)</label>
+                                        <small class="d-block text-muted">Automatically sets maxDate to today.</small>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-6">
@@ -466,6 +472,7 @@
                 daysOfWeekDisabled: dayOfWeekDisabledArr,
                 minDate: $('#minDate').val() || false,
                 maxDate: $('#maxDate').val() || false,
+                noFuture: $('#noFuture').is(':checked'),
 
                 // UI
                 showTodayButton: $('#showTodayButton').is(':checked'),
