@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" id="html-root" dir="ltr">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Master Hijri/Gregorian Picker - All Options Playground</title>
-
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
@@ -65,7 +65,8 @@
         }
 
         .main-content {
-            padding: 50px 30px;
+            padding: 80px 30px;
+            top: 80px;
         }
 
         .preview-card {
@@ -95,14 +96,103 @@
         pre#code-preview {
             max-height: 400px;
         }
+
+        /* Console Terminal Style */
+        #event-console {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        .log-entry { border-bottom: 1px solid #333; padding: 4px 0; }
+        .log-time { color: #858585; margin-right: 10px; }
+        .log-type { color: #569cd6; font-weight: bold; }
+        .log-msg { color: #ce9178; }
+
+        body {
+            position: relative;
+            scroll-behavior: smooth;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding-top: 10px;
+        }
+
+        .nav-link {
+            color: #333;
+            font-weight: 500;
+            border-radius: 5px;
+            margin-bottom: 2px;
+        }
+
+        .nav-link.active {
+            background-color: #563d7c !important;
+            color: #fff !important;
+        }
+
+        section {
+            padding: 60px 0 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .method-card {
+            border-left: 5px solid #563d7c;
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .badge-type {
+            background: #e9ecef;
+            color: #495057;
+            font-family: monospace;
+        }
+
+        .table code {
+            color: #d63384;
+            font-weight: bold;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: #563d7c !important;
+        }
+
     </style>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">HIJRI & GREGORIAN DATEPICKER <span class="badge badge-primary">v1.0.2</span></a>
+            <!-- <div class="ml-auto">
+                <a href="https://github.com/Mo7mud/bootstrap-hijri-datepicker" class="btn btn-dark btn-sm"><i
+                        class="fab fa-github"></i> Repository</a>
+            </div> -->
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto align-items-center">
+                    <li class="nav-item active"><a class="nav-link font-weight-bold" href="../doc/index.html">Documentation</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link btn" href="https://github.com/Mo7mud/bootstrap-hijri-datepicker" target="_blank">
+                        <i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-5 col-lg-4 sidebar">
+            <nav class="col-md-5 col-lg-4 sidebar sidebar-sticky">
                 <div class="sidebar-header">
                     <h5 class="mb-1">UI Logic Architect</h5>
                     <p class="small mb-0 opacity-75">Full Options Configurator</p>
@@ -121,13 +211,12 @@
                             <div id="secGeneral" class="collapse show" data-parent="#masterAccordion">
                                 <div class="card-body">
                                     <div class="custom-control custom-switch mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="hijri" >
+                                        <input type="checkbox" class="custom-control-input" id="hijri">
                                         <label class="custom-control-label" for="hijri">Hijri</label>
                                     </div>
                                     <div class="custom-control custom-switch mb-2">
                                         <input type="checkbox" class="custom-control-input" id="showSwitcher" checked>
-                                        <label class="custom-control-label" for="showSwitcher">Enable Mode
-                                            Switcher</label>
+                                        <label class="custom-control-label" for="showSwitcher">Enable Mode Switcher</label>
                                     </div>
                                     <div class="custom-control custom-switch mb-3">
                                         <input type="checkbox" class="custom-control-input" id="isRTL">
@@ -234,6 +323,12 @@
                                             <i class="fas fa-info-circle small text-muted"
                                                 title="Friday and Saturday"></i></label>
                                     </div>
+                                    <div class="custom-control custom-switch mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="noFuture">
+                                        <label class="custom-control-label" for="noFuture">No Future Dates
+                                            (noFuture)</label>
+                                        <small class="d-block text-muted">Automatically sets maxDate to today.</small>
+                                    </div>
                                     <div class="form-row">
                                         <div class="form-group col-6">
                                             <label>Min Date</label>
@@ -336,41 +431,93 @@
             </nav>
 
             <main class="col-md-7 col-lg-8 main-content">
-                <div class="text-center mb-5">
+                <div class="text-center mb-4">
                     <h2 class="font-weight-bold">Hijri & Gregorian Picker Laboratory</h2>
-                    <p class="text-muted">A comprehensive test-bed for version 4.17.37 (Modified)</p>
+                    <p class="text-muted">A comprehensive test-bed for Options, Methods & Events</p>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-11">
-                        <div class="card preview-card p-5 mb-5 border-0">
-                            <div class="form-group mb-0">
-                                <label for="hijri-picker" class="h5 mb-4 text-primary">Live Preview Instance:</label>
-                                <div id="picker-container" class="input-group input-group-lg">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-white border-right-0"><i
-                                                class="fas fa-calendar-day text-secondary"></i></span>
-                                    </div>
-                                    <input id="hijri-picker" type="text" class="form-control border-left-0 bg-white"
-                                        placeholder="Pick a date to see logic in action..." />
+                <div class="row">
+                    <div class="col-xl-6 mb-4">
+                        <div class="card preview-card p-4 mb-4 border-0">
+                            <h5 class="mb-4 text-primary"><i class="fas fa-calendar-day mr-2"></i> Live Instance</h5>
+                            <div id="picker-container" class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-white border-right-0"><i class="fas fa-calendar-day text-secondary"></i></span>
                                 </div>
-                                <div id="info-log" class="mt-3 small text-info font-italic"></div>
+                                <input id="hijri-picker" type="text" class="form-control border-left-0 bg-white" placeholder="Pick a date..." />
                             </div>
                         </div>
 
-                        <div class="mt-4">
+                        <div class="card preview-card p-4 border-0">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0 text-warning font-weight-bold"><i class="fas fa-list-alt mr-2"></i> Events Log</h5>
+                                <button class="btn btn-sm btn-link text-muted" onclick="$('#event-console').empty()">Clear</button>
+                            </div>
+                            <div id="event-console">
+                                <div class="log-entry"><span class="log-time">[System]</span> <span class="log-msg">Listening to plugin events...</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 mb-4">
+                        <div class="card preview-card p-4 border-0 h-100">
+                            <h5 class="mb-4 text-success font-weight-bold"><i class="fas fa-terminal mr-2"></i> Methods (API)</h5>
+                            
+                            <div class="mb-4">
+                                <label class="small text-muted font-weight-bold mb-2">Display Controls</label><br>
+                                <button class="btn btn-sm btn-outline-secondary mb-1" onclick="apiCall('show')">show()</button>
+                                <button class="btn btn-sm btn-outline-secondary mb-1" onclick="apiCall('hide')">hide()</button>
+                                <button class="btn btn-sm btn-outline-secondary mb-1" onclick="apiCall('toggle')">toggle()</button>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="small text-muted font-weight-bold mb-2">State Controls</label><br>
+                                <button class="btn btn-sm btn-outline-danger mb-1" onclick="apiCall('disable')">disable()</button>
+                                <button class="btn btn-sm btn-outline-success mb-1" onclick="apiCall('enable')">enable()</button>
+                                <button class="btn btn-sm btn-outline-warning mb-1" onclick="apiCall('clear')">clear()</button>
+                                <button class="btn btn-sm btn-dark mb-1" onclick="apiCall('destroy')">destroy()</button>
+                            </div>
+
+                            <hr>
+
+                            <div class="mb-3 mt-4">
+                                <label class="small text-muted font-weight-bold mb-2">Get Value (Returns Date)</label>
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-primary" type="button" onclick="getDateMethod()">date()</button>
+                                    </div>
+                                    <input type="text" id="method-output" class="form-control bg-light" placeholder="Result will appear here..." readonly>
+                                </div>
+                            </div>
+
+                            <div class="mb-0">
+                                <label class="small text-muted font-weight-bold mb-2">Set Value</label>
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-info" type="button" onclick="setDateMethod()">date(now)</button>
+                                    </div>
+                                    <input type="text" class="form-control bg-light text-muted" value="Sets picker to current date" readonly>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mt-2">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h6 class="font-weight-bold mb-0 text-secondary"><i class="fas fa-terminal mr-2"></i>
-                                    Javascript Implementation:</h6>
+                                <h6 class="font-weight-bold mb-0 text-secondary"><i class="fas fa-code mr-2"></i> Javascript Implementation:</h6>
                                 <button class="btn btn-sm btn-outline-secondary" onclick="copyCode()">Copy Code</button>
                             </div>
-                            <pre class="bg-dark text-light p-4 rounded shadow-lg border-0" id="code-preview"
-                                style="font-size: 0.85rem; line-height: 1.6;">
-// Your generated configuration will be here...
+                            <pre class="bg-dark text-light p-4 rounded shadow-lg border-0" id="code-preview" style="font-size: 0.85rem; line-height: 1.6;">
+// Configuration will be generated here...
                             </pre>
                         </div>
                     </div>
                 </div>
+
             </main>
         </div>
     </div>
@@ -391,12 +538,17 @@
                 const isRTL = $('#isRTL').is(':checked');
                 $('#html-root').attr('dir', isRTL ? 'rtl' : 'ltr');
 
-                // Refresh DOM completely to avoid plugin state pollution
+                // Destroy old instance if exists
+                if ($("#hijri-picker").data("HijriDatePicker")) {
+                    $("#hijri-picker").data("HijriDatePicker").destroy();
+                }
+
+                // Refresh HTML input to avoid state pollution
                 $('#picker-container').html(`
                     <div class="input-group-prepend">
                         <span class="input-group-text bg-white border-right-0"><i class="fas fa-calendar-day text-secondary"></i></span>
                     </div>
-                    <input id="hijri-picker" type="text" class="form-control border-left-0 bg-white" placeholder="Pick a date to see logic in action..." />
+                    <input id="hijri-picker" type="text" class="form-control border-left-0 bg-white" placeholder="Pick a date..." />
                 `);
 
                 initPicker();
@@ -405,33 +557,25 @@
                 const btn = $(this);
                 btn.html('<i class="fas fa-check-circle mr-2"></i> Instance Updated').addClass('btn-success');
                 setTimeout(() => btn.html('<i class="fas fa-play-circle mr-2"></i> Update Component').removeClass('btn-success'), 2000);
+                
+                logConsole('System', 'Plugin Re-initialized with new options');
             });
         });
 
         function initPicker() {
             const currentLocale = $('#locale').val();
             const isArabic = currentLocale === 'ar-sa';
-            const log = $('#info-log');
-            log.empty();
-
-            // --- SMART PRESET LOGIC GENERATION ---
-
-            // 1. Generate 5 disabled dates starting from tomorrow
+            
+            // Generate Presets
             let disabledDatesArr = [];
             if ($('#useDisabledDates').is(':checked')) {
                 for (let i = 1; i <= 5; i++) {
                     disabledDatesArr.push(moment().add(i, 'days').format('YYYY-MM-DD'));
                 }
-                log.append('<div><i class="fas fa-info-circle"></i> Note: Next 5 days are blocked.</div>');
             }
 
-            // 2. Disabled Hours Preset (00:00 to 06:00)
             let disabledHoursArr = $('#useDisabledHours').is(':checked') ? [0, 1, 2, 3, 4, 5, 6] : false;
-            if (disabledHoursArr) log.append('<div><i class="fas fa-info-circle"></i> Note: Late night hours (0-6) are blocked.</div>');
-
-            // 3. Weekends Preset
             let dayOfWeekDisabledArr = $('#useDaysOfWeekDisabled').is(':checked') ? [5, 6] : false;
-            if (dayOfWeekDisabledArr) log.append('<div><i class="fas fa-info-circle"></i> Note: Fridays & Saturdays are blocked.</div>');
 
             // 4. Custom Icons Preset
             let iconSet = $('#useCustomIcons').is(':checked') ? {
@@ -466,7 +610,7 @@
                 daysOfWeekDisabled: dayOfWeekDisabledArr,
                 minDate: $('#minDate').val() || false,
                 maxDate: $('#maxDate').val() || false,
-
+                noFuture: $('#noFuture').is(':checked'),
                 // UI
                 showTodayButton: $('#showTodayButton').is(':checked'),
                 showClear: $('#showClear').is(':checked'),
@@ -480,21 +624,92 @@
                 keepOpen: $('#keepOpen').is(':checked'),
                 ignoreReadonly: $('#ignoreReadonly').is(':checked'),
                 allowInputToggle: $('#allowInputToggle').is(':checked'),
-                useCurrent: true // Standard recommended
+                useCurrent: true,
+                hijriText: isArabic ? "هجري" : "Hijri",
+                gregorianText: isArabic ? "ميلادي" : "Gregorian"
             };
 
             // Apply Icon Set if enabled
             if (iconSet) settings.icons = iconSet;
 
-            // Localization Strings Override (Consistency Fix)
-            settings.hijriText = isArabic ? "هجري" : "Hijri";
-            settings.gregorianText = isArabic ? "ميلادي" : "Gregorian";
+            const pickerObj = $("#hijri-picker");
 
-            // --- INITIALIZE ---
-            $("#hijri-picker").hijriDatePicker(settings);
+            // Initialize Plugin
+            pickerObj.hijriDatePicker(settings);
 
-            // --- UPDATE DEVELOPER PREVIEW ---
+            // Bind Event Listeners
+            pickerObj.off('dp.change dp.show dp.hide dp.error');
+            
+            pickerObj.on('dp.change', function(e) {
+                let dateStr = e.date ? e.date.format('YYYY-MM-DD (iYYYY-iMM-iDD)') : 'Cleared';
+                logConsole('Event: dp.change', `Value set to: ${dateStr}`);
+            });
+
+            pickerObj.on('dp.show', function() {
+                logConsole('Event: dp.show', 'Picker opened');
+            });
+
+            pickerObj.on('dp.hide', function() {
+                logConsole('Event: dp.hide', 'Picker closed');
+            });
+
+            pickerObj.on('dp.error', function() {
+                logConsole('Event: dp.error', 'Invalid date prevented!', 'text-danger');
+            });
+
             updateCodePreview(settings);
+        }
+
+        // --- API Methods Controller ---
+
+        function getPickerInstance() {
+            return $("#hijri-picker").data("HijriDatePicker");
+        }
+
+        function apiCall(method) {
+            let picker = getPickerInstance();
+            if(picker && typeof picker[method] === 'function') {
+                picker[method]();
+                logConsole('Method Executed', `.${method}()`);
+            } else {
+                logConsole('Error', 'Plugin destroyed or method not found', 'text-danger');
+            }
+        }
+
+        function getDateMethod() {
+            let picker = getPickerInstance();
+            let outputField = $('#method-output');
+            
+            if(picker) {
+                let d = picker.date();
+                let text = d ? d.format('LLLL') : 'Null (Empty)';
+                // Display in text field instead of alert
+                outputField.val(text);
+                logConsole('Method Executed', `.date() returned: ${text}`);
+            } else {
+                outputField.val('Error: Plugin not initialized');
+            }
+        }
+
+        function setDateMethod() {
+            let picker = getPickerInstance();
+            if(picker) {
+                picker.date(moment());
+                logConsole('Method Executed', `.date(moment())`);
+            }
+        }
+
+        // --- Logging & UI Helpers ---
+
+        function logConsole(type, msg, colorClass = '') {
+            const time = moment().format('HH:mm:ss');
+            const el = `
+                <div class="log-entry ${colorClass}">
+                    <span class="log-time">[${time}]</span> 
+                    <span class="log-type">${type}:</span> 
+                    <span class="log-msg">${msg}</span>
+                </div>`;
+            $('#event-console').prepend(el);
         }
 
         function updateCodePreview(settings) {
@@ -505,14 +720,21 @@
             if (Array.isArray(previewObj.disabledDates)) {
                 previewObj.disabledDates = previewObj.disabledDates.map(d => d + " (Auto-Generated)");
             }
+            const codeSnippet = `// Initialization
+$("#hijri-picker").hijriDatePicker(${JSON.stringify(previewObj, null, 4)});
 
-            const codeSnippet = `$("#hijri-picker").hijriDatePicker(${JSON.stringify(previewObj, null, 4)});`;
+// Event Listening
+$("#hijri-picker").on('dp.change', function(e) {
+    console.log(e.date);
+});`;
             $('#code-preview').text(codeSnippet);
         }
 
         function copyCode() {
             const text = $('#code-preview').text();
-            navigator.clipboard.writeText(text).then(() => alert('Code copied to clipboard!'));
+            navigator.clipboard.writeText(text).then(() => {
+                logConsole('System', 'Code copied to clipboard');
+            });
         }
     </script>
 

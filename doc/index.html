@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Official Documentation - Bootstrap Hijri Datepicker</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="css/doc.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            position: relative;
+            scroll-behavior: smooth;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding-top: 10px;
+        }
+
+        .nav-link {
+            color: #333;
+            font-weight: 500;
+            border-radius: 5px;
+            margin-bottom: 2px;
+        }
+
+        .nav-link.active {
+            background-color: #563d7c !important;
+            color: #fff !important;
+        }
+
+        section {
+            padding: 60px 0 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .method-card {
+            border-left: 5px solid #563d7c;
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .badge-type {
+            background: #e9ecef;
+            color: #495057;
+            font-family: monospace;
+        }
+
+        .table code {
+            color: #d63384;
+            font-weight: bold;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: #563d7c !important;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target="#docs-sidebar" data-offset="100">
+
+    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">HIJRI & GREGORIAN DATEPICKER <span class="badge badge-primary">v1.0.2</span></a>
+            <!-- <div class="ml-auto">
+                <a href="https://github.com/Mo7mud/bootstrap-hijri-datepicker" class="btn btn-dark btn-sm"><i
+                        class="fab fa-github"></i> Repository</a>
+            </div> -->
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto align-items-center">
+                    <li class="nav-item">
+                        <a href="../samples/index.html" class="btn btn-outline-primary btn-sm btn-demo px-3">
+                            <i class="fas fa-play-circle mr-1"></i> Live Demo
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2"><a class="nav-link btn" href="https://github.com/Mo7mud/bootstrap-hijri-datepicker" target="_blank">
+                        <i class="fab fa-github"></i> GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar-sticky border-right" id="docs-sidebar">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item"><a class="nav-link" href="#installation">Installation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#all-options">Options (Full List)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#methods-core">Methods: Core</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#methods-data">Methods: Data & Value</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#methods-config">Methods: Dynamic Config</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+                </ul>
+            </nav>
+
+            <main class="col-md-9 col-lg-10 px-md-5">
+
+                <section id="installation">
+                    <h1 class="display-4">Documentation</h1>
+                    <p class="lead">The complete API reference for the Bootstrap Hijri Datepicker.</p>
+                    <hr>
+                    <h3>Installation</h3>
+                    <p>Ensure you have <strong>jQuery</strong>, <strong>Bootstrap 4</strong>, and
+                        <strong>Moment.js</strong> loaded.
+                    </p>
+                    <pre><code class="language-html">&lt;!-- CSS --&gt;
+&lt;link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"&gt;
+
+&lt;!-- Required JS Stack --&gt;
+&lt;script src="js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/moment-with-locales.js"&gt;&lt;/script&gt;
+&lt;script src="js/moment-hijri.js"&gt;&lt;/script&gt;
+&lt;script src="js/bootstrap-hijri-datetimepicker.js"&gt;&lt;/script&gt;</code></pre>
+                </section>
+
+                <section id="all-options">
+                    <h2>Options</h2>
+                    <p>These options can be passed as an object to the <code>hijriDatePicker()</code> function.</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Option</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>hijri</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Enables Hijri calendar by default.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>showSwitcher</code></td>
+                                    <td>boolean</td>
+                                    <td><code>true</code></td>
+                                    <td>Shows the Hijri/Gregorian toggle button.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>format</code></td>
+                                    <td>string</td>
+                                    <td><code>'YYYY-MM-DD'</code></td>
+                                    <td>Gregorian date format.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>hijriFormat</code></td>
+                                    <td>string</td>
+                                    <td><code>'iYYYY-iMM-iDD'</code></td>
+                                    <td>Hijri date format.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>locale</code></td>
+                                    <td>string</td>
+                                    <td><code>'en-us'</code></td>
+                                    <td>Localization (e.g., 'ar-sa').</td>
+                                </tr>
+                                <tr>
+                                    <td><code>isRTL</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Force Right-to-Left layout.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>noFuture</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Prevents selection of future dates.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>viewMode</code></td>
+                                    <td>string</td>
+                                    <td><code>'days'</code></td>
+                                    <td>Default view: 'days', 'months', 'years', 'decades'.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>minDate</code></td>
+                                    <td>moment|date|str</td>
+                                    <td><code>false</code></td>
+                                    <td>The minimum allowed date.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>maxDate</code></td>
+                                    <td>moment|date|str</td>
+                                    <td><code>false</code></td>
+                                    <td>The maximum allowed date.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>stepping</code></td>
+                                    <td>integer</td>
+                                    <td><code>1</code></td>
+                                    <td>Minute increment for time picker.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>sideBySide</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Display date and time widgets together.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>showTodayButton</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Show "Today" shortcut.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>showClear</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Show "Clear" button.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>showClose</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Show "Close" button.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>keepOpen</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Keep widget open after selection.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>debug</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Forced open state for testing.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>ignoreReadonly</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Allow opening on readonly inputs.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>allowInputToggle</code></td>
+                                    <td>boolean</td>
+                                    <td><code>false</code></td>
+                                    <td>Toggle picker on input click.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>daysOfWeekDisabled</code></td>
+                                    <td>array</td>
+                                    <td><code>[]</code></td>
+                                    <td>Days to disable (0-6).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>disabledDates</code></td>
+                                    <td>array</td>
+                                    <td><code>false</code></td>
+                                    <td>Array of specific disabled dates.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>enabledDates</code></td>
+                                    <td>array</td>
+                                    <td><code>false</code></td>
+                                    <td>Array of exclusively enabled dates.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>icons</code></td>
+                                    <td>object</td>
+                                    <td><code>{...}</code></td>
+                                    <td>Custom icons for toolbar (FA or Glyphicons).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="methods-core">
+                    <h2>Methods: Core Control</h2>
+                    <p>Accessed via: <code>$('#picker').data('HijriDatePicker').methodName()</code></p>
+
+                    <div class="method-card">
+                        <h5><code>.show()</code> / <code>.hide()</code> / <code>.toggle()</code></h5>
+                        <p>Manually control the widget visibility.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h5><code>.disable()</code> / <code>.enable()</code></h5>
+                        <p>Enables or disables the input field and picker interaction.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h5><code>.destroy()</code></h5>
+                        <p>Removes the datepicker functionality and clean up the DOM elements.</p>
+                    </div>
+                </section>
+
+                <section id="methods-data">
+                    <h2>Methods: Data & Values</h2>
+
+                    <div class="method-card">
+                        <h5><code>.date([newDate])</code></h5>
+                        <p><strong>Getter:</strong> Returns the current selected date as a <code>moment</code>
+                            object.<br>
+                            <strong>Setter:</strong> Takes a string, Date object, or moment object to update the value.
+                        </p>
+                        <pre><code class="language-javascript">var val = $('#picker').data('HijriDatePicker').date();
+$('#picker').data('HijriDatePicker').date('2026-04-20');</code></pre>
+                    </div>
+
+                    <div class="method-card">
+                        <h5><code>.clear()</code></h5>
+                        <p>Clears the selected date and the input field.</p>
+                    </div>
+                </section>
+
+                <section id="methods-config">
+                    <h2>Methods: Dynamic Configuration</h2>
+                    <p>These methods allow you to update settings after the plugin has been initialized.</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Accepts</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>.options([object])</code></td>
+                                    <td>Object</td>
+                                    <td>Get or set all options at once.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.hijri([boolean])</code></td>
+                                    <td>Boolean</td>
+                                    <td>Toggle Hijri mode on the fly.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.locale([string])</code></td>
+                                    <td>String</td>
+                                    <td>Change language (e.g., 'en', 'ar').</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.format([string])</code></td>
+                                    <td>String</td>
+                                    <td>Update Gregorian format.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.minDate([date])</code></td>
+                                    <td>Date|Moment</td>
+                                    <td>Update minimum allowed date.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.maxDate([date])</code></td>
+                                    <td>Date|Moment</td>
+                                    <td>Update maximum allowed date.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.viewMode([string])</code></td>
+                                    <td>String</td>
+                                    <td>Change view: 'days', 'months', etc.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="events">
+                    <h2>Events</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>dp.change</code></td>
+                                    <td>Triggered when the date or time changes. <code>e.date</code> contains the new
+                                        value.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>dp.show</code></td>
+                                    <td>Triggered when the picker widget is displayed.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>dp.hide</code></td>
+                                    <td>Triggered when the picker widget is hidden.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>dp.error</code></td>
+                                    <td>Triggered when an invalid date is entered.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>dp.update</code></td>
+                                    <td>Triggered when the view (year/month) is changed.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pre>
+                        <code class="language-javascript">$('#picker').on('dp.change', function(e) {
+                            console.log("Date changed to: " + e.date.format('YYYY-MM-DD'));
+                            });
+                        </code>
+                    </pre>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <footer class="bg-white border-top py-4 mt-5">
+        <div class="container text-center text-muted">
+            &copy; 2026 Hijri Datepicker Documentation - Generated from Plugin Source.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/components/prism-javascript.min.js"></script>
+
+    <script>
+        $(function () {
+            $('body').scrollspy({ target: '#docs-sidebar', offset: 120 });
+        });
+    </script>
+</body>
+
+</html>
