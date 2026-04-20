@@ -1,5 +1,8 @@
+# Documentation
+See  [Docs](https://mo7mud.github.io/Bootstrap-Hijri-Gregorian-Datepicker/index.html)
+
 # Demo
-See  [Live Demo](https://mo7mud.github.io/bootstrap-hijri-datepicker/samples/)
+See  [Live Demo](https://mo7mud.github.io/Bootstrap-Hijri-Gregorian-Datepicker/demo.html)
 
 # Getting Started
 Bootstrap Hijri Date picker v1.0.0
