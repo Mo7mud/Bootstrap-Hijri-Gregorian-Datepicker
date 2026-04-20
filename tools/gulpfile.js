@@ -43,12 +43,11 @@ gulp.task('clean', () => {
   return del(['../dist/*'],{force:true});
 });
 
-gulp.task('copy-samples', () => {
+gulp.task('copy-docs', () => {
   return gulp.src(['../dist/css/*.css','../dist/js/*.js'])
-    .pipe(gulpCopy('../samples/',{prefix:2}))
-    .pipe(gulpCopy('../doc/wwwroot/',{prefix:2}))
-    .pipe(gulp.dest('../samples'));
+    .pipe(gulpCopy('../docs/',{prefix:2}))
+    .pipe(gulp.dest('../docs'));
 });
 
 
-exports.build = gulp.series('clean','minify-js','minify-css','copy','copy-samples');
+exports.build = gulp.series('clean','minify-js','minify-css','copy','copy-docs');

@@ -13552,7 +13552,7 @@
 
                         initFormatting();
 
-                        $(".data-switch-button").html(options.hijriText);
+                        widget.find(".data-switch-button").html(options.hijriText);
                     }
                     else {
                         options.hijri = true;
@@ -13560,7 +13560,7 @@
                         fillHijriMonths();
                         initFormatting();
 
-                        $(".data-switch-button").html(options.gregorianText);
+                        widget.find(".data-switch-button").html(options.gregorianText);
 
                     }
 
@@ -14835,6 +14835,21 @@
 
         $.extend(true, options, dataToOptions());
 
+        // The Smart "No Future" Trick
+        if (options.noFuture) {
+            var today = getMoment(); // 
+            
+            if (options.maxDate) { 
+                var userMaxDate = moment(options.maxDate);
+                
+                if (userMaxDate.isAfter(today)) {
+                    options.maxDate = today;
+                }
+            } else {
+                options.maxDate = today;
+            }
+        }
+
         // Apply localization to UI buttons based on the selected locale
         if (options.locale && options.locale.toLowerCase().startsWith('ar')) {
             options.icons.today = 'اليوم';
@@ -15077,6 +15092,7 @@
         viewDate: false,
         hijri: false,
         isRTL: false,
+        noFuture: false, // If true, sets the maxDate to the current date, thus preventing the user from selecting a future date.
         hijriText: "هجري",
         gregorianText: "ميلادي"
     };
