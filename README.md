@@ -1,5 +1,5 @@
-# Documentation
-See  [Docs](https://mo7mud.github.io/Bootstrap-Hijri-Gregorian-Datepicker/index.html)
+## Docs
+See  [Documentation](https://mo7mud.github.io/Bootstrap-Hijri-Gregorian-Datepicker/index.html)
 
 # Demo
 See  [Live Demo](https://mo7mud.github.io/Bootstrap-Hijri-Gregorian-Datepicker/demo.html)
@@ -110,7 +110,7 @@ Download the  repository and use css and javascript files in `dist` folder
 
 ## Docs
 
-<!-- See  [Documentation](http://hijri-datepicker.azurewebsites.net/doc) -->
+See  [Documentation](https://mo7mud.github.io/Bootstrap-Hijri-Gregorian-Datepicker/index.html)
 
 ## Acknowledgements
 
